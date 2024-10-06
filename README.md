@@ -41,3 +41,84 @@ El compensador de atraso-adelanto integra los beneficios de ambos tipos de compe
 
 ![MGP](images/MGP.png)
 
+Figura 1. Imagen de medidas MG y MP
+
+## 3.Consideraciones
+
+Si los márgenes de ganancia (MG) y de fase (MP) son positivos, el sistema se mantiene estable en lazo cerrado. Es ideal que estos márgenes sean lo más grandes posible para asegurar la estabilidad. Sin embargo, si MG y MP son cero o negativos, el sistema puede volverse inestable en lazo cerrado.
+
+## 4. Con respeto a respuesta temporal
+
+Para un sistema de segundo orden continuo: 
+
+$$\[
+G_o = \frac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}
+\]$$
+
+* Margen de ganancia $\geq$ 10dB, Margen de fase $\geq$ 45° --> $M_r$ $\approx$ 1.3
+* Margen de ganancia $\geq$ 12dB, Margen de fase $\geq$ 60° --> $M_r$ $\approx$ 1.0
+
+### 4.1 Parámetros que depende el margen de fase
+
+$$\[
+G_o = \frac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}
+\]$$
+
+Usualmente se aproxima a: $\phi_{m}=100\xi$
+
+El margen de fase y el %overshoot están relacionados de la siguiente manera:
+
+$$\phi_{m}=tan^{-1}\left[\frac{2\xi}{\left(\sqrt{4\xi^{4}+1-2\xi^{2}}^{1/2} \right)}\right]$$
+
+## 5.Procedimiento de diseño
+
+* Discretizar la planta analógica para obtener un equivalente G(z)
+* Transformar G(z) a G(w) mediante la transformación bilineal dada por:
+
+$$z =\frac{1+\frac{T}{2}w}{1-\frac{T}{2}w} $$
+
+* Graficar los diagramas de bodel para la función G(w)
+* Aplicar el método de diseño para C(w)
+* Recuperar C(z) a partir de G(w) para poder programarlo
+
+$$w = \frac{2}{T} \frac{z - 1}{z + 1}$$
+
+## 6.Redes de atraso
+
+Esta dada por una fucnión que va a controlar el sistema el cual es el siguiente: 0<a<1
+
+$$C\left[w\right]=\frac{1+aT_{1}w}{1+T_{1}w}$$
+
+El diagrama de esto puede es:
+
+![redatraso](images/redatraso.png)
+
+Figura 2. Diagrama de red de atraso
+
+### 6.1. Metodología de diseño de red de atraso
+
+* Determinar Kp  para asegurar que se cumpla el requisito de error
+* Posteriormente, medir los márgenes de estabilidad considerando el valor de Kp
+* Luego, calcular la frecuencia necesaria para obtener $M_p+6°$ , estableciendo esta frecuencia como la nueva condición G=0
+* Finalmente, medir la atenuación requerida a esa frecuencia para cumplir con el margen de fase establecido.
+
+$\alpha=-20\log a$ , $a=10^{\frac{-\alpha}{20}}$
+
+*Calcular T1:
+
+$$\frac{1}{T_{1}a}=\frac{\omega_G}{10}$$
+
+## 7.Conclusiones
+
+El diseño de redes de atraso permite ajustar la estabilidad del sistema disminuyendo la ganancia en altas frecuencias y reduciendo la sensibilidad al ruido. Es una herramienta esencial en el control digital, donde se busca un equilibrio entre velocidad de respuesta y estabilidad, especialmente en sistemas afectados por ruido en alta frecuencia.
+
+## 8.Referencias
+
+1. C. Chen, Analog and digital control system design, Saunders College Publishing.
+2. Tomado de: https://repository.unad.edu.co/bitstream/handle/10596/5790/documents.mx_compensacion-de-adelanto-retraso-y-adelanto-retraso-de.pdf;jsessionid=5FB2A590F2D2D3417692CD24D02A8985?sequence=1
+3. http://scielo.senescyt.gob.ec/scielo.php?script=sci_arttext&pid=S2602-84922019000100076
+​
+ 
+
+
+
