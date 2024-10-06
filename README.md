@@ -39,5 +39,5 @@ El compensador de atraso-adelanto integra los beneficios de ambos tipos de compe
 
 ### 2.3.Medida de Margenes de Estabilidad
 
-![Figura de prueba](images/plantilla/Captura2.PNG)
+![MGP](Redes-de-Atraso/MGP.png)
 
